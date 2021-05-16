@@ -1,6 +1,7 @@
 package boardgame.model;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 
 import java.util.*;
 
@@ -13,6 +14,19 @@ public class BoardGameModel {
 
     private boolean [][] visited;
 
+    public enum Player{
+        PLAYER1, PLAYER2;
+
+        public Player next(){
+            return switch (this){
+                case PLAYER1 -> PLAYER2;
+                case PLAYER2 -> PLAYER1;
+            };
+        }
+    }
+
+    private ReadOnlyObjectWrapper<Player> nextPlayer = new ReadOnlyObjectWrapper<Player>();
+
 
 
     public BoardGameModel() {
@@ -21,7 +35,9 @@ public class BoardGameModel {
         visited = new boolean[BOARD_SIZE_ROW][BOARD_SIZE_COLUMN];
         visited [2][0] = true;
         visited [3][7] = true;
+
     }
+
 
     public BoardGameModel(Piece... pieces) {
         checkPieces(pieces);
@@ -91,6 +107,7 @@ public class BoardGameModel {
         visited[oldPos.row()][oldPos.col()] = true;
         /*System.out.println(pieceNumber);
         System.out.println(pieces[pieceNumber].getType());*/
+        nextPlayer.set(nextPlayer.get().next());
     }
 
     public static boolean isOnBoard(Position position) {
