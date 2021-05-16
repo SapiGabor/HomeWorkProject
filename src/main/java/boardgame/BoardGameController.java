@@ -188,4 +188,12 @@ public class BoardGameController {
         oldSquare.getChildren().clear();
     }
 
+    @FXML
+    private void resetGame(){
+        Logger.debug("Resetting game...");
+        selectionPhase = SelectionPhase.SELECT_FROM;
+        board.getChildren().clear();
+        model = new BoardGameModel();
+        initialize();
+    }
 }

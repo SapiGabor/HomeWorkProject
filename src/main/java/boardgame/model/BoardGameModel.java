@@ -35,6 +35,10 @@ public class BoardGameModel {
         visited = new boolean[BOARD_SIZE_ROW][BOARD_SIZE_COLUMN];
         visited [2][0] = true;
         visited [3][7] = true;
+        nextPlayer.set(Player.PLAYER1);
+
+
+
 
     }
 
@@ -117,8 +121,14 @@ public class BoardGameModel {
 
     public List<Position> getPiecePositions() {
         List<Position> positions = new ArrayList<>(pieces.length);
+        PieceType currentType = switch (nextPlayer.get()){
+            case PLAYER1 -> PieceType.WHITE;
+            case PLAYER2 -> PieceType.BLACK;
+        };
         for (var piece : pieces) {
-            positions.add(piece.getPosition());
+            if (piece.getType().equals(currentType)) {
+                positions.add(piece.getPosition());
+            }
         }
         return positions;
     }
