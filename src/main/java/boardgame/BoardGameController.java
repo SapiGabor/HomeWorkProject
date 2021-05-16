@@ -1,5 +1,6 @@
 package boardgame;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +67,7 @@ public class BoardGameController {
         return square;
     }
 
+
     private void createPieces() {
         for (int i = 0; i < model.getPieceCount(); i++) {
             model.positionProperty(i).addListener(this::piecePositionChange);
@@ -74,9 +76,13 @@ public class BoardGameController {
         }
     }
 
+
+
     private Circle createPiece(Color color) {
-        var piece = new Circle(50);
+        var piece = new Circle(30);
         piece.setFill(color);
+        //piece.setStroke(stroke);*/
+        //piece.setStrokeWidth(1);
         return piece;
     }
 

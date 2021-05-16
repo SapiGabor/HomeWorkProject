@@ -11,9 +11,16 @@ public class BoardGameModel {
 
     private final Piece[] pieces;
 
+    private boolean [][] visited;
+
+
+
     public BoardGameModel() {
         this(new Piece(PieceType.WHITE, new Position(2, 0)),
                 new Piece(PieceType.BLACK, new Position(3, 7)));
+        visited = new boolean[BOARD_SIZE_ROW][BOARD_SIZE_COLUMN];
+        visited [2][0] = true;
+        visited [3][7] = true;
     }
 
     public BoardGameModel(Piece... pieces) {
@@ -47,12 +54,17 @@ public class BoardGameModel {
         return pieces[pieceNumber].positionProperty();
     }
 
+
     public boolean isValidMove(int pieceNumber, PawnDirection direction) {
         if (pieceNumber < 0 || pieceNumber >= pieces.length) {
             throw new IllegalArgumentException();
         }
         Position newPosition = pieces[pieceNumber].getPosition().moveTo(direction);
         if (! isOnBoard(newPosition)) {
+            return false;
+        }
+        if (visited[newPosition.row()][newPosition.col()] == true)
+        {
             return false;
         }
         for (var piece : pieces) {
@@ -74,15 +86,12 @@ public class BoardGameModel {
     }
 
     public void move(int pieceNumber, PawnDirection direction) {
-        pieces[pieceNumber].moveTo(direction);
+        Position oldPos = getPiecePosition(pieceNumber);
+        this.pieces[pieceNumber].moveTo(direction);
+        visited[oldPos.row()][oldPos.col()] = true;
+        /*System.out.println(pieceNumber);
+        System.out.println(pieces[pieceNumber].getType());*/
     }
-
-    /*public void remove(int pieceNumber) {
-        pieces[pieceNumber] = new Piece(PieceType.TRANSPARENT,pieces[pieceNumber].getPosition());
-        System.out.println(pieceNumber);
-        System.out.println(pieces[pieceNumber].getType());
-        utolsoPozicioSzam = pieceNumber;
-    }*/
 
     public static boolean isOnBoard(Position position) {
         return 0 <= position.row() && position.row() < BOARD_SIZE_ROW
