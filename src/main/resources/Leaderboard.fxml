@@ -19,7 +19,7 @@
       </TextField>
       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Főmenü">
+            <Button fx:id="backToMainMenu" mnemonicParsing="false" text="Főmenü">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

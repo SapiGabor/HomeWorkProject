@@ -8,17 +8,17 @@
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Új játék" />
+            <Button fx:id="startANewGame" mnemonicParsing="false" onAction="#startNewGame" text="Új játék" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Eredmények" />
+            <Button fx:id="goToLeaderboard" mnemonicParsing="false" onAction="#goToLeaderboard" text="Eredmények" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Kilépés" />
+            <Button fx:id="quitGame" mnemonicParsing="false" onAction="#quitGame" text="Kilépés" />
          </children>
       </HBox>
    </children>

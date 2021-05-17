@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class MenuController {
     @FXML
-    private void handleLeaderboard(ActionEvent event) throws IOException {
+    private void goToLeaderboard(ActionEvent event) throws IOException {
         Logger.debug("Eredmények");
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Leaderboard.fxml"));
@@ -22,7 +22,7 @@ public class MenuController {
         stage.show();
     }
     @FXML
-    private void handleNewGame(ActionEvent event) throws IOException {
+    private void startNewGame(ActionEvent event) throws IOException {
         Logger.debug("Játékos menü");
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/menu.fxml"));
@@ -30,7 +30,7 @@ public class MenuController {
         stage.show();
     }
     @FXML
-    private void handleQuitGame(ActionEvent event){
+    private void quitGame(ActionEvent event){
         Logger.debug("Kilépés");
         Platform.exit();
     }
