@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgame.menu.MenuController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgame.jdbi.resultController">
    <children>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="NEVER">
          <children>
@@ -22,7 +22,7 @@
       </HBox>
       <HBox alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Button fx:id="backToMainMenu" mnemonicParsing="false" text="Főmenü">
+            <Button fx:id="backToMainMenu" mnemonicParsing="false" onAction="#backToMenu" text="Főmenü">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
