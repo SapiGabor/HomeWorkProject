@@ -36,12 +36,12 @@
       </VBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleContinue" text="Tovább">
+            <Button fx:id="continueButton" mnemonicParsing="false" onAction="#handleContinue" text="Tovább">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#handlePrevious" text="Vissza">
+            <Button fx:id="previousButton" mnemonicParsing="false" onAction="#handlePrevious" text="Vissza">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
