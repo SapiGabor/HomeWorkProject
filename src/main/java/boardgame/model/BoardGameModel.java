@@ -2,6 +2,7 @@ package boardgame.model;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import org.tinylog.Logger;
 
 import java.util.*;
 
@@ -105,13 +106,59 @@ public class BoardGameModel {
         return validMoves;
     }
 
+    public boolean getWhiteHasMoves(){
+        if(getValidMoves(0).size() > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public boolean getBlackHasMoves(){
+        if(getValidMoves(1).size() > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public boolean isGameOver(){
+        if(getWhiteHasMoves() == true && getBlackHasMoves() == true)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
+
     public void move(int pieceNumber, PawnDirection direction) {
         Position oldPos = getPiecePosition(pieceNumber);
         this.pieces[pieceNumber].moveTo(direction);
         visited[oldPos.row()][oldPos.col()] = true;
-        /*System.out.println(pieceNumber);
-        System.out.println(pieces[pieceNumber].getType());*/
-        nextPlayer.set(nextPlayer.get().next());
+        if(isGameOver() == true)
+        {
+            Logger.info("A játéknak vége!");
+            if(getWhiteHasMoves() == false)
+            {
+                Logger.info("A fekete játékos nyert");
+            }
+            else
+            {
+                Logger.info("A fehér játékos nyert");
+            }
+        }
+        else {
+            nextPlayer.set(nextPlayer.get().next());
+        }
     }
 
     public static boolean isOnBoard(Position position) {

@@ -1,17 +1,25 @@
 package boardgame;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import javafx.stage.Stage;
 import org.tinylog.Logger;
 
 import boardgame.model.BoardGameModel;
@@ -38,18 +46,36 @@ public class BoardGameController {
 
     private Position selected;
 
-    private BoardGameModel model = new BoardGameModel();
+    private BoardGameModel model;
 
     @FXML
     private GridPane board;
 
     @FXML
+    private Button newGameButton;
+
+
+
+    @FXML
     private void initialize() {
+        model = new BoardGameModel();
+        newGameButton.setDisable(true);
         createBoard();
         createPieces();
         setSelectablePositions();
         showSelectablePositions();
     }
+
+    @FXML
+    private void startNewGame(ActionEvent event) throws IOException
+    {
+        Logger.debug("Új játék kezdete");
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/playersettings.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
 
     private void createBoard() {
         for (int i = 0; i < board.getRowCount(); i++) {
@@ -88,12 +114,20 @@ public class BoardGameController {
 
     @FXML
     private void handleMouseClick(MouseEvent event) {
-        var square = (StackPane) event.getSource();
-        var row = GridPane.getRowIndex(square);
-        var col = GridPane.getColumnIndex(square);
-        var position = new Position(row, col);
-        Logger.debug("Click on square {}", position);
-        handleClickOnSquare(position);
+        if(model.isGameOver() == false)
+        {
+            var square = (StackPane) event.getSource();
+            var row = GridPane.getRowIndex(square);
+            var col = GridPane.getColumnIndex(square);
+            var position = new Position(row, col);
+            Logger.debug("Click on square {}", position);
+            handleClickOnSquare(position);
+        }
+        else
+        {
+            hideSelectablePositions();
+            newGameButton.setDisable(false);
+        }
     }
 
     private void handleClickOnSquare(Position position) {
@@ -193,7 +227,6 @@ public class BoardGameController {
         Logger.debug("Resetting game...");
         selectionPhase = SelectionPhase.SELECT_FROM;
         board.getChildren().clear();
-        model = new BoardGameModel();
         initialize();
     }
 }
