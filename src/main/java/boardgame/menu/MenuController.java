@@ -1,6 +1,5 @@
 package boardgame.menu;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +16,7 @@ public class MenuController {
     private void goToLeaderboard(ActionEvent event) throws IOException {
         Logger.debug("Eredmények");
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Leaderboard.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Leaderboard.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -25,13 +24,8 @@ public class MenuController {
     private void startNewGame(ActionEvent event) throws IOException {
         Logger.debug("Játékos menü");
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/menu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/playersettings.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
-    }
-    @FXML
-    private void quitGame(ActionEvent event){
-        Logger.debug("Kilépés");
-        Platform.exit();
     }
 }
