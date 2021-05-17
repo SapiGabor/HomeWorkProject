@@ -14,7 +14,9 @@ public class BoardGameModel {
     private final Piece[] pieces;
 
     private boolean [][] visited;
-
+    /**
+     * This is the enum which stores that which Players can be used.
+     */
     public enum Player{
         PLAYER1, PLAYER2;
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import boardgame.jdbi.jdbiController;
+import boardgame.model.PieceType;
 import boardgame.player.PlayerStates;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -22,6 +23,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.tinylog.Logger;
 
@@ -103,19 +106,27 @@ public class BoardGameController {
     private void createPieces() {
         for (int i = 0; i < model.getPieceCount(); i++) {
             model.positionProperty(i).addListener(this::piecePositionChange);
-            var piece = createPiece(Color.valueOf(model.getPieceType(i).name()));
+            var piece = createPiece(model.getPieceType(i));
             getSquare(model.getPiecePosition(i)).getChildren().add(piece);
         }
     }
 
 
 
-    private Circle createPiece(Color color) {
-        var piece = new Circle(30);
-        piece.setFill(color);
-        piece.setStroke(Color.BLACK);
-        piece.setStrokeWidth(1);
-        return piece;
+    private Text createPiece(PieceType piecetype) {
+        Text king = new Text();
+        switch (piecetype)
+        {
+            case WHITE -> {
+                king = new Text("\u2654");
+                king.getStyleClass().add("white");
+            }
+            case BLACK -> {
+                king = new Text("\u265A");
+                king.getStyleClass().add("black");
+            }
+        }
+        return king;
     }
 
     @FXML

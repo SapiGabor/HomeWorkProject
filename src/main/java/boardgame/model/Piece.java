@@ -3,9 +3,18 @@ package boardgame.model;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-public class Piece {
+/**
+ * This is a class which stores the information abaout a {@code Piece}
+ */
 
+public class Piece {
+    /**
+     * This is used for to store the actual {@code PieceType} that the Piece represeents.
+     */
     private final PieceType type;
+    /**
+     * This is used for to store what {@code Position} this Piece is at.
+     */
     private final ObjectProperty<Position> position = new SimpleObjectProperty<>();
 
     public Piece(PieceType type, Position position) {
