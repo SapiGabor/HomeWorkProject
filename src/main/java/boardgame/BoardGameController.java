@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -40,7 +41,7 @@ public class BoardGameController {
         }
     }
 
-    private SelectionPhase selectionPhase = SelectionPhase.SELECT_FROM;
+    private SelectionPhase selectionPhase;
 
     private List<Position> selectablePositions = new ArrayList<>();
 
@@ -59,6 +60,7 @@ public class BoardGameController {
     @FXML
     private void initialize() {
         model = new BoardGameModel();
+        selectionPhase = SelectionPhase.SELECT_FROM;
         newGameButton.setDisable(true);
         createBoard();
         createPieces();
@@ -70,6 +72,7 @@ public class BoardGameController {
     private void startNewGame(ActionEvent event) throws IOException
     {
         Logger.debug("Új játék kezdete");
+        board.getChildren().clear();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/playersettings.fxml"));
         stage.setScene(new Scene(root));
@@ -107,8 +110,8 @@ public class BoardGameController {
     private Circle createPiece(Color color) {
         var piece = new Circle(30);
         piece.setFill(color);
-        //piece.setStroke(stroke);*/
-        //piece.setStrokeWidth(1);
+        piece.setStroke(Color.BLACK);
+        piece.setStrokeWidth(1);
         return piece;
     }
 
@@ -122,11 +125,6 @@ public class BoardGameController {
             var position = new Position(row, col);
             Logger.debug("Click on square {}", position);
             handleClickOnSquare(position);
-        }
-        else
-        {
-            hideSelectablePositions();
-            newGameButton.setDisable(false);
         }
     }
 
@@ -154,8 +152,29 @@ public class BoardGameController {
     private void alterSelectionPhase() {
         selectionPhase = selectionPhase.alter();
         hideSelectablePositions();
-        setSelectablePositions();
-        showSelectablePositions();
+        if(model.isGameOver() == false)
+        {
+            setSelectablePositions();
+            showSelectablePositions();
+        }
+        else
+        {
+            //hideSelectablePositions();
+            Alert gameOverAlert = new Alert(Alert.AlertType.INFORMATION);
+            gameOverAlert.setHeaderText("Játék vége!");
+            if(model.getWhiteHasMoves() == false)
+            {
+                Logger.info("A fekete játékos nyert");
+                gameOverAlert.setContentText("A fekete játékos nyert.");
+            }
+            else
+            {
+                Logger.info("A fehér játékos nyert");
+                gameOverAlert.setContentText("A fehér játékos nyert.");
+            }
+            gameOverAlert.show();
+            newGameButton.setDisable(false);
+        }
     }
 
     private void selectPosition(Position position) {
@@ -225,7 +244,6 @@ public class BoardGameController {
     @FXML
     private void resetGame(){
         Logger.debug("Resetting game...");
-        selectionPhase = SelectionPhase.SELECT_FROM;
         board.getChildren().clear();
         initialize();
     }

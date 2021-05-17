@@ -147,14 +147,6 @@ public class BoardGameModel {
         if(isGameOver() == true)
         {
             Logger.info("A játéknak vége!");
-            if(getWhiteHasMoves() == false)
-            {
-                Logger.info("A fekete játékos nyert");
-            }
-            else
-            {
-                Logger.info("A fehér játékos nyert");
-            }
         }
         else {
             nextPlayer.set(nextPlayer.get().next());
