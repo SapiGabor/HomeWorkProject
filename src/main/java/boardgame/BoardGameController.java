@@ -80,6 +80,7 @@ public class BoardGameController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+    @FXML
 
 
     private void createBoard() {
