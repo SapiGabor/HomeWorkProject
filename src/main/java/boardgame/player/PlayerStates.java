@@ -17,7 +17,7 @@ public class PlayerStates {
             secondPlayerName = name;
         }
     }
-    public static String getPlayerName(int playerNum, String name)
+    public static String getPlayerName(int playerNum)
     {
         if(playerNum == 1)
         {

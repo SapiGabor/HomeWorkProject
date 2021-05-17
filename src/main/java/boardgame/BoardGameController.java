@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import boardgame.player.PlayerStates;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -164,13 +165,13 @@ public class BoardGameController {
             gameOverAlert.setHeaderText("Játék vége!");
             if(model.getWhiteHasMoves() == false)
             {
-                Logger.info("A fekete játékos nyert");
-                gameOverAlert.setContentText("A fekete játékos nyert.");
+                Logger.info("A fekete játékos nyert" + PlayerStates.getPlayerName(1));
+                gameOverAlert.setContentText("A fekete játékos nyert (" + PlayerStates.getPlayerName(1)+ ").");
             }
             else
             {
-                Logger.info("A fehér játékos nyert");
-                gameOverAlert.setContentText("A fehér játékos nyert.");
+                Logger.info("A fehér játékos nyert" + PlayerStates.getPlayerName(2));
+                gameOverAlert.setContentText("A fehér játékos nyert (" + PlayerStates.getPlayerName(2)+ ").");
             }
             gameOverAlert.show();
             newGameButton.setDisable(false);
