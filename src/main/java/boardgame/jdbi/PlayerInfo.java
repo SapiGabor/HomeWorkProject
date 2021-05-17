@@ -12,5 +12,3 @@ public class PlayerInfo {
     int winCount;
     int loseCount;
 }
-
-
