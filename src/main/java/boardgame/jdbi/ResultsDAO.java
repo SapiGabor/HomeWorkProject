@@ -12,34 +12,29 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 @RegisterBeanMapper(PlayerInfo.class)
 public interface ResultsDAO {
-
     /**
      * Creates the results table.
      */
     @SqlUpdate("CREATE TABLE results(name VARCHAR PRIMARY KEY, winCount INTEGER, loseCount INTEGER)")
     void createTable();
-
     /**
      * Inserts a player with no results.
      * @param name The name of the player.
      */
     @SqlUpdate("INSERT INTO results VALUES(:name,0,0)")
     void insertPlayer(@Bind("name") String name);
-
     /**
      * To the current player it raises win number by one.
      * @param name The name of the player.
      */
     @SqlUpdate("UPDATE results SET winCount = winCount + 1 WHERE name = :name")
     void raisePlayerWin(@Bind("name") String name);
-
     /**
      * To the current player it raises lose number by one.
      * @param name The name of the player.
      */
     @SqlUpdate("UPDATE results SET loseCount = loseCount + 1 WHERE name = :name")
     void raisePlayerLose(@Bind("name") String name);
-
     /**
      * Checking if the player is in the database already or not.
      * @param name The name of the player.
@@ -47,7 +42,6 @@ public interface ResultsDAO {
      */
     @SqlQuery("SELECT EXISTS (SELECT * FROM results WHERE name = (:name))")
     boolean playerExists(@Bind("name") String name);
-
     /**
      * Get the first ten players info order by winCount and loseCount
      * @return The first ten players.

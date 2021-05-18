@@ -6,7 +6,6 @@ import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 import org.tinylog.Logger;
 
 import java.util.ArrayList;
-
 /**
  * This class is made for handle JDBI operations and connections.
  */
@@ -15,7 +14,6 @@ public class jdbiController {
      * This field stores the JDBI's state.
      */
     private static Jdbi jdbi;
-
     /**
      * It creates database, installing plugins.
      * There's a try catch which can log out when the table already exists.
@@ -33,7 +31,6 @@ public class jdbiController {
             Logger.debug("A tábla már létezik! (" + exception.getClass() + ")");
         }
     }
-
     /**
      * Stores a win for the player.
      * If user was already in the database, it will increase {@code winCount} +1.
@@ -54,7 +51,6 @@ public class jdbiController {
                 return true;});
         }
     }
-
     /**
      * Stores a lose for the player.
      * If user was already in the database, it will increase {@code loseCount} +1.
@@ -75,7 +71,6 @@ public class jdbiController {
                 return true;});
         }
     }
-
     /**
      * Gets the first ten players from database.
      * If there are no 10 player names stored, it will return as many as it can.

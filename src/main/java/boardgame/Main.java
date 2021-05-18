@@ -8,6 +8,7 @@ import javafx.application.Application;
 public class Main {
     /**
      * Launches {@code MainMenuApplication}
+     * @param args currently not using
      */
     public static void main(String[] args) {
         Application.launch(MenuApplication.class, args);
