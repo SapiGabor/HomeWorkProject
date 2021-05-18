@@ -17,18 +17,39 @@ public class Piece {
      */
     private final ObjectProperty<Position> position = new SimpleObjectProperty<>();
 
+    /**
+     * Creates a {@code Piece} with the {@code PieceType} and {@code Position} that were given.
+     * @param type {@code PieceType} of {@code Piece}.
+     * @param position {@code Position} of {@code Piece}.
+     */
+
     public Piece(PieceType type, Position position) {
         this.type = type;
         this.position.set(position);
     }
 
+    /**
+     * Gets type of the {@code Piece}.
+     * @return the {@code Piece}'s {@code PieceType}.
+     */
+
     public PieceType getType() {
         return type;
     }
 
+    /**
+     * This function gets the {@code Piece}'s {@code Position}.
+     * @return {@code Piece}'s {@code Position}.
+     */
+
     public Position getPosition() {
         return position.get();
     }
+
+    /**
+     * This method moves the {@code Piece}'s {@code Position} in the given {@code Direction}.
+     * @param direction is the given Direction where it moves.
+     */
 
     public void moveTo(Direction direction) {
         Position newPosition = position.get().moveTo(direction);

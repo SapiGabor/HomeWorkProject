@@ -8,15 +8,34 @@ import java.util.*;
 
 public class BoardGameModel {
 
+    /**
+     * The row size of the board is given here.
+     */
+
     public static int BOARD_SIZE_ROW= 6;
+
+    /**
+     * The col size of the board is given here.
+     */
+
     public static int BOARD_SIZE_COLUMN = 8;
+
+    /**
+     * It is an array which records the pieces on the board.
+     */
 
     private final Piece[] pieces;
 
+    /**
+     * This matrix stores which squares were visited.
+     */
+
     private boolean [][] visited;
+
     /**
      * This is the enum which stores that which Players can be used.
      */
+
     public enum Player{
         PLAYER1, PLAYER2;
 
@@ -28,9 +47,19 @@ public class BoardGameModel {
         }
     }
 
+    /**
+     * It records which player turns.
+     */
+
     private ReadOnlyObjectWrapper<Player> nextPlayer = new ReadOnlyObjectWrapper<Player>();
 
-
+    /**
+     * This it he begining of the board.
+     * It places the white and black king to it's designated places.
+     * This places should be visited at the start, so this two positions will store in
+     * the visited matrix and will be set to true.
+     * It records that PLAYER1 will start the game.
+     */
 
     public BoardGameModel() {
         this(new Piece(PieceType.WHITE, new Position(2, 0)),
@@ -39,17 +68,23 @@ public class BoardGameModel {
         visited [2][0] = true;
         visited [3][7] = true;
         nextPlayer.set(Player.PLAYER1);
-
-
-
-
     }
 
+    /**
+     * It's a checker constructor.
+     * It checks that the {@code Piece} {@code Position} is correct.
+     * It will only add pieces if {@Position} is correct.
+     */
 
     public BoardGameModel(Piece... pieces) {
         checkPieces(pieces);
         this.pieces = pieces.clone();
     }
+
+    /**
+     * Checks if the {@code Piece} array is valid.
+     * @param pieces given {@code Piece} array.
+     */
 
     private void checkPieces(Piece[] pieces) {
         var seen = new HashSet<Position>();
@@ -61,9 +96,16 @@ public class BoardGameModel {
         }
     }
 
+    /**
+     * It's the piece count on the board.
+     * @return pieces.
+     */
+
     public int getPieceCount() {
         return pieces.length;
     }
+
+    
 
     public PieceType getPieceType(int pieceNumber) {
         return pieces[pieceNumber].getType();
