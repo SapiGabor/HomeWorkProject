@@ -1,6 +1,5 @@
 package boardgame;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +19,13 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.tinylog.Logger;
 
 import boardgame.model.BoardGameModel;
-import boardgame.model.PawnDirection;
+import boardgame.model.KingDirection;
 import boardgame.model.Position;
 
 public class BoardGameController {
@@ -153,7 +149,7 @@ public class BoardGameController {
             case SELECT_TO -> {
                 if (selectablePositions.contains(position)) {
                     var pieceNumber = model.getPieceNumber(selected).getAsInt();
-                    var direction = PawnDirection.of(position.row() - selected.row(), position.col() - selected.col());
+                    var direction = KingDirection.of(position.row() - selected.row(), position.col() - selected.col());
                     Logger.debug("Moving piece {} {}", pieceNumber, direction);
                     model.move(pieceNumber, direction);
                     deselectSelectedPosition();

@@ -4,7 +4,7 @@ package boardgame.model;
  * This enum contains which {@code Direction}'s can we choose from.
  */
 
-public enum PawnDirection implements Direction {
+public enum KingDirection implements Direction {
 
     UP_LEFT(-1, -1),
     UP(-1, 0),
@@ -28,12 +28,12 @@ public enum PawnDirection implements Direction {
     private final int colChange;
 
     /**
-     * Default constructor of {@code SimpleDirection}.
+     * Default constructor of {@code KingDirection}.
      * @param rowChange present row change.
      * @param colChange present column change.
      */
 
-    PawnDirection(int rowChange, int colChange) {
+    KingDirection(int rowChange, int colChange) {
 
 
         this.rowChange = rowChange;
@@ -42,8 +42,8 @@ public enum PawnDirection implements Direction {
     }
 
     /**
-     * Get the present row change of {@code SimpleDirection}.
-     * @return row change (integer).
+     * Get the present row change of {@code KingDirection}.
+     * @return row change.
      */
 
     public int getRowChange() {
@@ -51,7 +51,7 @@ public enum PawnDirection implements Direction {
     }
 
     /**
-     * Get the present column change of {@code SimpleDirection}.
+     * Get the present column change of {@code KingDirection}.
      * @return column change (integer).
      */
 
@@ -65,7 +65,7 @@ public enum PawnDirection implements Direction {
      * @param colChange change of the cols.
      */
 
-    public static PawnDirection of(int rowChange, int colChange) {
+    public static KingDirection of(int rowChange, int colChange) {
         for (var direction : values()) {
             if (direction.rowChange == rowChange && direction.colChange == colChange) {
                 return direction;

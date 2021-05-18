@@ -60,6 +60,11 @@ public class Piece {
         return position;
     }
 
+    /**
+     * This function formats a {@code String} from the current {@code PieceType} and {@code Position}.
+     * @return the formed {@code String}.
+     */
+
     public String toString() {
         return type.toString() + position.get().toString();
     }
@@ -70,7 +75,7 @@ public class Piece {
             System.out.printf("%s -> %s\n", oldPosition.toString(), newPosition.toString());
         });
         System.out.println(piece);
-        piece.moveTo(PawnDirection.DOWN_RIGHT);
+        piece.moveTo(KingDirection.DOWN_RIGHT);
         System.out.println(piece);
     }
 }

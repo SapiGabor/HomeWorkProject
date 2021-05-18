@@ -105,22 +105,44 @@ public class BoardGameModel {
         return pieces.length;
     }
 
-    
+    /**
+     * Gets type of {@code Piece}'s.
+     * @param pieceNumber is the number of {@code Piece} in the array of the pieces.
+     * @return the {@code PieceType} of the {@code Piece}.
+     */
 
     public PieceType getPieceType(int pieceNumber) {
         return pieces[pieceNumber].getType();
     }
 
+    /**
+     * Gets the position of the {@code Piece} number.
+     * @param pieceNumber is the number of {@code Piece} in the array of the pieces.
+     * @return the {@code Position} of the {@code Piece}.
+     */
+
     public Position getPiecePosition(int pieceNumber) {
         return pieces[pieceNumber].getPosition();
     }
+
+    /**
+     * Returns positionProperty of the Piece.
+     * @param pieceNumber is the number of {@code Piece} in the array of the pieces.
+     * @return the positionProperty of the {@code Piece}.
+     */
 
     public ObjectProperty<Position> positionProperty(int pieceNumber) {
         return pieces[pieceNumber].positionProperty();
     }
 
+    /**
+     * It checks that {@code Piece} can move to a direction which is given by the user.
+     * @param pieceNumber is the number of {@code Piece} in the array of the pieces.
+     * @param direction is the direction of {@code KingDirection} where we would like to replace the {@code Piece}.
+     * @return a boolean which can be true(move is valid) or false(move is invalid).
+     */
 
-    public boolean isValidMove(int pieceNumber, PawnDirection direction) {
+    public boolean isValidMove(int pieceNumber, KingDirection direction) {
         if (pieceNumber < 0 || pieceNumber >= pieces.length) {
             throw new IllegalArgumentException();
         }
@@ -140,15 +162,26 @@ public class BoardGameModel {
         return true;
     }
 
-    public Set<PawnDirection> getValidMoves(int pieceNumber) {
-        EnumSet<PawnDirection> validMoves = EnumSet.noneOf(PawnDirection.class);
-        for (var direction : PawnDirection.values()) {
+    /**
+     * Gets all the moves that can made by the {@code Piece}.
+     * @param pieceNumber is the number of {@code Piece} in the array of the pieces.
+     * @return all possible {@code KingDirection} moves that Piece can make.
+     */
+
+    public Set<KingDirection> getValidMoves(int pieceNumber) {
+        EnumSet<KingDirection> validMoves = EnumSet.noneOf(KingDirection.class);
+        for (var direction : KingDirection.values()) {
             if (isValidMove(pieceNumber, direction)) {
                 validMoves.add(direction);
             }
         }
         return validMoves;
     }
+
+    /**
+     * Returns that white will be able to move or not.
+     * @return true(can move) or false(can't move)
+     */
 
     public boolean getWhiteHasMoves(){
         if(getValidMoves(0).size() > 0)
@@ -161,6 +194,11 @@ public class BoardGameModel {
         }
     }
 
+    /**
+     * Returns that black will be able to move or not.
+     * @return true(can move) or false(can't move)
+     */
+
     public boolean getBlackHasMoves(){
         if(getValidMoves(1).size() > 0)
         {
@@ -171,6 +209,11 @@ public class BoardGameModel {
             return false;
         }
     }
+
+    /**
+     * Returns that the game is over or not.
+     * @return true(if yes) or false(not yet).
+     */
 
     public boolean isGameOver(){
         if(getWhiteHasMoves() == true && getBlackHasMoves() == true)
@@ -184,7 +227,15 @@ public class BoardGameModel {
 
     }
 
-    public void move(int pieceNumber, PawnDirection direction) {
+    /**
+     * Moves the {@code Piece} to the {@code KingDirection}.
+     * It checks if the game is over or not. If it's over, it will log "A játéknak vége" message.
+     * If game is not over, then it will gives the turn to the nextPlayer.
+     * @param pieceNumber is the number of {@code Piece} in the array of the pieces.
+     * @param direction is the direction of {@code KingDirection} where we would like to replace the {@code Piece}.
+     */
+
+    public void move(int pieceNumber, KingDirection direction) {
         Position oldPos = getPiecePosition(pieceNumber);
         this.pieces[pieceNumber].moveTo(direction);
         visited[oldPos.row()][oldPos.col()] = true;
@@ -197,10 +248,21 @@ public class BoardGameModel {
         }
     }
 
+    /**
+     * Checking {@code Position} if it is on the board.
+     * @param position is the position we want to check.
+     * @return {@code Position} is on the board or not.
+     */
+
     public static boolean isOnBoard(Position position) {
         return 0 <= position.row() && position.row() < BOARD_SIZE_ROW
                 && 0 <= position.col() && position.col() < BOARD_SIZE_COLUMN;
     }
+
+    /**
+     * Gets {@code Piece} positions belonging to the current player.
+     * @return {@code Piece} positions as arraylist.
+     */
 
     public List<Position> getPiecePositions() {
         List<Position> positions = new ArrayList<>(pieces.length);
@@ -216,6 +278,12 @@ public class BoardGameModel {
         return positions;
     }
 
+    /**
+     * Gets the {@code Position}'s {@code Piece}'s number.
+     * @param position is the position we want to check.
+     * @return {@code OptionalInt} empty or {@code Piece}'s number.
+     */
+
     public OptionalInt getPieceNumber(Position position) {
         for (int i = 0; i < pieces.length; i++) {
             if (pieces[i].getPosition().equals(position)) {
@@ -224,6 +292,11 @@ public class BoardGameModel {
         }
         return OptionalInt.empty();
     }
+
+    /**
+     * Creates a {@code String} from the present version of the {@code Piece}' on the board.
+     * @return a {@code String} which represents the version of the {@code Piece}'s on the board.
+     */
 
     public String toString() {
         StringJoiner joiner = new StringJoiner(",", "[", "]");

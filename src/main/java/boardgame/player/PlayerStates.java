@@ -3,13 +3,17 @@ package boardgame.player;
 import boardgame.model.BoardGameModel;
 
 public class PlayerStates {
+
     /**
      * First {@code Player}'s name.
      */
+
     private static String firstPlayerName;
+
     /**
      * Second {@code Player}'s name.
      */
+
     private static String secondPlayerName;
 
     /**
