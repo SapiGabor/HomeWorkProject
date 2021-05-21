@@ -200,7 +200,7 @@ public class BoardGameModel {
     public void move(int pieceNumber, KingDirection direction) {
         Position oldPos = getPiecePosition(pieceNumber);
         this.pieces[pieceNumber].moveTo(direction);
-        visited[oldPos.row()][oldPos.col()] = true;
+
         if(isGameOver() == true)
         {
             Logger.info("A játéknak vége!");
@@ -208,6 +208,21 @@ public class BoardGameModel {
         else {
             nextPlayer.set(nextPlayer.get().next());
         }
+    }
+    public void removeSquare(Position position){
+        visited[position.row()][position.col()] = true;
+    }
+    public List<Position> removeableSquares(){
+        List<Position> removables = new ArrayList<>();
+        for (int i = 0; i < BOARD_SIZE_ROW; i++) {
+            for (int j = 0; j < BOARD_SIZE_COLUMN; j++) {
+                if(visited[i][j] == false)
+                {
+                    removables.add(new Position(i,j));
+                }
+            }
+        }
+        return removables;
     }
     /**
      * Checking {@code Position} if it is on the board.
