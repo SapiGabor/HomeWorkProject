@@ -185,18 +185,18 @@ public class BoardGameController {
             if(model.getWhiteHasMoves() == false)
             {
                 jdbiController results = new jdbiController();
-                results.winUpdate(PlayerStates.getPlayerName(1));
-                results.loseUpdate(PlayerStates.getPlayerName(2));
-                Logger.info("A fekete játékos nyert" + PlayerStates.getPlayerName(1));
-                gameOverAlert.setContentText("A fekete játékos nyert (" + PlayerStates.getPlayerName(1)+ ").");
+                results.winUpdate(PlayerStates.getPlayerName(2));
+                results.loseUpdate(PlayerStates.getPlayerName(1));
+                Logger.info("A fekete játékos nyert: " + PlayerStates.getPlayerName(2));
+                gameOverAlert.setContentText("A fekete játékos nyert (" + PlayerStates.getPlayerName(2)+ ").");
             }
             else
             {
                 jdbiController results = new jdbiController();
-                results.winUpdate(PlayerStates.getPlayerName(2));
-                results.loseUpdate(PlayerStates.getPlayerName(1));
-                Logger.info("A fehér játékos nyert" + PlayerStates.getPlayerName(2));
-                gameOverAlert.setContentText("A fehér játékos nyert (" + PlayerStates.getPlayerName(2)+ ").");
+                results.winUpdate(PlayerStates.getPlayerName(1));
+                results.loseUpdate(PlayerStates.getPlayerName(2));
+                Logger.info("A fehér játékos nyert: " + PlayerStates.getPlayerName(1));
+                gameOverAlert.setContentText("A fehér játékos nyert (" + PlayerStates.getPlayerName(1)+ ").");
             }
             gameOverAlert.show();
             newGameButton.setDisable(false);
