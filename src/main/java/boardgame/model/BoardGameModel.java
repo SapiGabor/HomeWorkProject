@@ -2,6 +2,7 @@ package boardgame.model;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.geometry.Pos;
 import org.tinylog.Logger;
 
 import java.util.*;
@@ -200,7 +201,9 @@ public class BoardGameModel {
     public void move(int pieceNumber, KingDirection direction) {
         Position oldPos = getPiecePosition(pieceNumber);
         this.pieces[pieceNumber].moveTo(direction);
-
+        Position newPos = getPiecePosition(pieceNumber);
+        visited[oldPos.row()][oldPos.col()] = false;
+        visited[newPos.row()][newPos.col()] = true;
         if(isGameOver() == true)
         {
             Logger.info("A játéknak vége!");
@@ -212,7 +215,7 @@ public class BoardGameModel {
     public void removeSquare(Position position){
         visited[position.row()][position.col()] = true;
     }
-    public List<Position> removeableSquares(){
+    public List<Position> getRemovableSquares(){
         List<Position> removables = new ArrayList<>();
         for (int i = 0; i < BOARD_SIZE_ROW; i++) {
             for (int j = 0; j < BOARD_SIZE_COLUMN; j++) {
@@ -223,6 +226,10 @@ public class BoardGameModel {
             }
         }
         return removables;
+    }
+    public boolean isRemoved(Position position)
+    {
+        return visited[position.row()][position.col()];
     }
     /**
      * Checking {@code Position} if it is on the board.
@@ -247,6 +254,13 @@ public class BoardGameModel {
             if (piece.getType().equals(currentType)) {
                 positions.add(piece.getPosition());
             }
+        }
+        return positions;
+    }
+    public List<Position> getAllPiecePositions(){
+        List<Position> positions = new ArrayList<>(pieces.length);
+        for (var piece : pieces) {
+            positions.add(piece.getPosition());
         }
         return positions;
     }
