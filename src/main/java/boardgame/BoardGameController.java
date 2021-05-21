@@ -32,12 +32,14 @@ public class BoardGameController {
 
     private enum SelectionPhase {
         SELECT_FROM,
-        SELECT_TO;
+        SELECT_TO,
+        SELECT_REMOVE;
 
         public SelectionPhase alter() {
             return switch (this) {
                 case SELECT_FROM -> SELECT_TO;
-                case SELECT_TO -> SELECT_FROM;
+                case SELECT_TO -> SELECT_REMOVE;
+                case SELECT_REMOVE -> SELECT_FROM;
             };
         }
     }
@@ -85,13 +87,13 @@ public class BoardGameController {
     private void createBoard() {
         for (int i = 0; i < board.getRowCount(); i++) {
             for (int j = 0; j < board.getColumnCount(); j++) {
-                var square = createSquare();
+                var square = createSquare(new Position(i,j));
                 board.add(square, j, i);
             }
         }
     }
 
-    private StackPane createSquare() {
+    private StackPane createSquare(Position position) {
         var square = new StackPane();
         square.getStyleClass().add("square");
         square.setOnMouseClicked(this::handleMouseClick);
@@ -153,6 +155,14 @@ public class BoardGameController {
                     Logger.debug("Moving piece {} {}", pieceNumber, direction);
                     model.move(pieceNumber, direction);
                     deselectSelectedPosition();
+                    alterSelectionPhase();
+                }
+            }
+            case SELECT_REMOVE -> {
+                if (selectablePositions.contains(position))
+                {
+                    model.removeSquare(position);
+                    Logger.debug("Mező eltávolítva "+position.toString()+".");
                     alterSelectionPhase();
                 }
             }
@@ -223,6 +233,7 @@ public class BoardGameController {
                     selectablePositions.add(selected.moveTo(direction));
                 }
             }
+            case SELECT_REMOVE -> selectablePositions.addAll(model.getRemovableSquares());
         }
     }
 
