@@ -162,6 +162,7 @@ public class BoardGameController {
                 if (selectablePositions.contains(position))
                 {
                     model.removeSquare(position);
+                    getSquare(position).getStyleClass().add("removed");
                     Logger.debug("Mező eltávolítva "+position.toString()+".");
                     alterSelectionPhase();
                 }

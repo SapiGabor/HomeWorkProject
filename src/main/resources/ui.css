@@ -24,3 +24,6 @@
 .removed{
     -fx-background-color: rgba(255,0,0,50);
 }
+.removed:hover {
+    -fx-background-color: rgba(255,0,0,50);
+}
