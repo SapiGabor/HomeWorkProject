@@ -79,17 +79,6 @@ public class jdbiController {
     public static ArrayList<PlayerInfo> firstTen()
     {
         new jdbiController();
-        PlayerInfo[] players = jdbi.withExtension(ResultsDAO.class,dao -> dao.getFirstTenPlayers());
-        int max = 10;
-        ArrayList<PlayerInfo> firstTenPlayers = new ArrayList<PlayerInfo>();
-        if(players.length < 10)
-        {
-            max = players.length;
-        }
-        for (int i = 0; i < max; i++)
-        {
-            firstTenPlayers.add(players[i]);
-        }
-        return firstTenPlayers;
+        return jdbi.withExtension(ResultsDAO.class,dao -> dao.getFirstTenPlayers());
     }
 }

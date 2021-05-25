@@ -6,6 +6,8 @@ import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
+import java.util.ArrayList;
+
 /**
  * It contains info and operations about the database.
  */
@@ -47,5 +49,5 @@ public interface ResultsDAO {
      * @return The first ten players.
      */
     @SqlQuery("SELECT name, winCount, loseCount FROM results ORDER BY winCount DESC, loseCount LIMIT 10")
-    PlayerInfo[] getFirstTenPlayers();
+    ArrayList<PlayerInfo> getFirstTenPlayers();
 }
