@@ -212,6 +212,11 @@ public class BoardGameModel {
             nextPlayer.set(nextPlayer.get().next());
         }
     }
+
+    /**
+     * Removes a square at the given position.
+     * @param position where the square is removed.
+     */
     public void removeSquare(Position position){
         visited[position.row()][position.col()] = true;
     }
@@ -227,6 +232,12 @@ public class BoardGameModel {
         }
         return removables;
     }
+
+    /**
+     * Return if a square is already removed or not at the given position.
+     * @param position that is checked.
+     * @return true or false.
+     */
     public boolean isRemoved(Position position)
     {
         return visited[position.row()][position.col()];
@@ -257,6 +268,11 @@ public class BoardGameModel {
         }
         return positions;
     }
+
+    /**
+     * Gets all the piece positions on the board.
+     * @return list of positions.
+     */
     public List<Position> getAllPiecePositions(){
         List<Position> positions = new ArrayList<>(pieces.length);
         for (var piece : pieces) {
