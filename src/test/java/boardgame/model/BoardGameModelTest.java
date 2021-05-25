@@ -59,6 +59,8 @@ class BoardGameModelTest {
     @Test
     void getPiecePositions() {
         assertEquals(new Position(2,0), model.getPiecePositions().get(0));
+        model.move(0, KingDirection.DOWN);
+        assertEquals(new Position(3,7), model.getPiecePositions().get(0));
     }
 
     @Test
