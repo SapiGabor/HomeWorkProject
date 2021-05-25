@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package boardgame.jdbi;
 
 import javafx.event.ActionEvent;
