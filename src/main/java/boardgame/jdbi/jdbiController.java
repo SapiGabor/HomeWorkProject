@@ -76,7 +76,7 @@ public class jdbiController {
      * If there are no 10 player names stored, it will return as many as it can.
      * @return {@code ArrayList} stores {@code PlayerInfo}'s.
      */
-    public static ArrayList<PlayerInfo> firstTen()
+    public static ArrayList<PlayerResult> firstTen()
     {
         new jdbiController();
         return jdbi.withExtension(ResultsDAO.class,dao -> dao.getFirstTenPlayers());

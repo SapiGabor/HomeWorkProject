@@ -19,7 +19,7 @@ public class resultController {
     @FXML
     private void  initialize (){
         boardgame.jdbi.jdbiController resultsController = new boardgame.jdbi.jdbiController();
-        ArrayList<PlayerInfo> list = resultsController.firstTen();
+        ArrayList<PlayerResult> list = resultsController.firstTen();
         int counter = 1;
         for (var player: list){
             resultsID.getChildren().add(new Text(counter+".\tNév: "+ player.getName() +"\tGyőzelem: "+player.getWinCount()+"\tVereség: "+player.getLoseCount()+"\n\n"));

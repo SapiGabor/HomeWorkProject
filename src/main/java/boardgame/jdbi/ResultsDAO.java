@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * It contains info and operations about the database.
  */
 
-@RegisterBeanMapper(PlayerInfo.class)
+@RegisterBeanMapper(PlayerResult.class)
 public interface ResultsDAO {
     /**
      * Creates the results table.
@@ -49,5 +49,5 @@ public interface ResultsDAO {
      * @return The first ten players.
      */
     @SqlQuery("SELECT name, winCount, loseCount FROM results ORDER BY winCount DESC, loseCount LIMIT 10")
-    ArrayList<PlayerInfo> getFirstTenPlayers();
+    ArrayList<PlayerResult> getFirstTenPlayers();
 }

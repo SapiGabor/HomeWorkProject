@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlayerInfo {
+public class PlayerResult {
     /**
      * Records info of Player's name.
      */
