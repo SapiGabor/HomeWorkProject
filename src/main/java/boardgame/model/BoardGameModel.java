@@ -7,6 +7,9 @@ import org.tinylog.Logger;
 
 import java.util.*;
 
+/**
+ * This class stores data about the current game.
+ */
 public class BoardGameModel {
     /**
      * The row size of the board is given here.
@@ -30,6 +33,10 @@ public class BoardGameModel {
     public enum Player{
         PLAYER1, PLAYER2;
 
+        /**
+         * Alters which player is next.
+         * @return the next player.
+         */
         public Player next(){
             return switch (this){
                 case PLAYER1 -> PLAYER2;
@@ -60,6 +67,7 @@ public class BoardGameModel {
      * It's a checker constructor.
      * It checks that the {@code Piece} {@code Position} is correct.
      * It will only add pieces if {@code Position} is correct.
+     * @param pieces given {@code Piece} array.
      */
     public BoardGameModel(Piece... pieces) {
         checkPieces(pieces);

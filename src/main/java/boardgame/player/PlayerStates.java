@@ -29,7 +29,8 @@ public class PlayerStates {
     }
     /**
      * Gets the name of {@code Player}.
-     * @return the name of the {@code Player}
+     * @param playerNum number of player.
+     * @return the name of the {@code Player}.
      */
     public static String getPlayerName(int playerNum)
     {

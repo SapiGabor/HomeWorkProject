@@ -45,7 +45,7 @@ public interface ResultsDAO {
     @SqlQuery("SELECT EXISTS (SELECT * FROM results WHERE name = (:name))")
     boolean playerExists(@Bind("name") String name);
     /**
-     * Get the first ten players info order by winCount and loseCount
+     * Get the first ten players info order by winCount and loseCount.
      * @return The first ten players.
      */
     @SqlQuery("SELECT name, winCount, loseCount FROM results ORDER BY winCount DESC, loseCount LIMIT 10")

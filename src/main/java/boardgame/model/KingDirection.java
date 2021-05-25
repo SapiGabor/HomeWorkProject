@@ -50,6 +50,7 @@ public enum KingDirection implements Direction {
      * Determines which enum can be used with the given changes.
      * @param rowChange change of the row.
      * @param colChange change of the cols.
+     * @return which direction can be applied.
      */
     public static KingDirection of(int rowChange, int colChange) {
         for (var direction : values()) {

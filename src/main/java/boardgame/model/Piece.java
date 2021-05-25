@@ -3,7 +3,7 @@ package boardgame.model;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 /**
- * This is a class which stores the information abaout a {@code Piece}
+ * This is a class which stores the information abaout a {@code Piece}.
  */
 public class Piece {
     /**
@@ -46,6 +46,10 @@ public class Piece {
         position.set(newPosition);
     }
 
+    /**
+     * Gets the position property.
+     * @return position as a property.
+     */
     public ObjectProperty<Position> positionProperty() {
         return position;
     }
