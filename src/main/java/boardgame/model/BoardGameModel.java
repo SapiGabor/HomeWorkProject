@@ -220,6 +220,11 @@ public class BoardGameModel {
     public void removeSquare(Position position){
         visited[position.row()][position.col()] = true;
     }
+
+    /**
+     * Gets the list of positions that can be removed from theh board.
+     * @return list of positions.
+     */
     public List<Position> getRemovableSquares(){
         List<Position> removables = new ArrayList<>();
         for (int i = 0; i < BOARD_SIZE_ROW; i++) {
