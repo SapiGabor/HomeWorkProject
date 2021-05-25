@@ -1,7 +1,9 @@
 package boardgame.player;
 
-import boardgame.model.BoardGameModel;
 
+/**
+ * This class stores the names of the players.
+ */
 public class PlayerStates {
     /**
      * First {@code Player}'s name.
